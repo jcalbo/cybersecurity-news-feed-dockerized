@@ -11,7 +11,7 @@ venv/
 ENV/
 
 # uv
-uv.lock
+# uv.lock - MUST be included for Docker builds
 
 # Testing
 .pytest_cache/
