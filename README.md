@@ -105,6 +105,35 @@ uv run streamlit run app.py
 
 The frontend will open in your browser at `http://localhost:8501`
 
+## 🐳 Docker Deployment (Production-Ready)
+
+For production deployment with all services containerized:
+
+```bash
+# Start all services (Elasticsearch + Backend + Frontend)
+docker-compose up -d
+
+# Verify setup
+./verify_docker_setup.sh
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+**Services will be available at:**
+- Frontend UI: http://localhost:8501
+- Backend API: http://localhost:8000
+- Elasticsearch: http://localhost:9200
+
+**First startup takes ~60 seconds** for Elasticsearch initialization.
+
+For detailed Docker documentation, see:
+- [`DOCKER_GUIDE.md`](DOCKER_GUIDE.md) - Complete Docker guide
+- [`DEV02_COMPLETE.md`](DEV02_COMPLETE.md) - Architecture and testing
+
 ## ⚡ Why UV?
 
 This project uses [**uv**](https://docs.astral.sh/uv/) for dependency management:
