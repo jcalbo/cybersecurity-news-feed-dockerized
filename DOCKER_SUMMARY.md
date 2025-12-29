@@ -88,9 +88,14 @@ docker-compose down
 ```
 Docker Host
     │
+    ├── Elasticsearch Container (port 9200)
+    │   └── Document storage & search
+    │       └── 10-minute cache for news
+    │
     ├── Backend Container (port 8000)
     │   └── FastAPI REST API
-    │       └── Fetches RSS feeds
+    │       ├── Fetches RSS feeds
+    │       └── Caches in Elasticsearch
     │
     ├── Frontend Container (port 8501)
     │   └── Streamlit UI

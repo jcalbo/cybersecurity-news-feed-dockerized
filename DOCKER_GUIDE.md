@@ -25,8 +25,11 @@ docker-compose up -d
 ```
 
 That's it! Services will be available at:
-- **Frontend:** http://localhost:8501
+- **Frontend UI:** http://localhost:8501
 - **Backend API:** http://localhost:8000
+- **Elasticsearch:** http://localhost:9200
+
+**Note:** First startup takes ~60 seconds for Elasticsearch to initialize.
 
 ### **Option 2: Individual Containers**
 
@@ -155,25 +158,26 @@ services:
 ## 🏗️ **Architecture**
 
 ```
-┌─────────────────────────────────────────────┐
-│           Docker Host (Your Machine)         │
-│                                              │
-│  ┌─────────────────────────────────────┐    │
-│  │  cybersecurity-network (Bridge)     │    │
-│  │                                      │    │
-│  │  ┌────────────┐    ┌─────────────┐ │    │
-│  │  │  Frontend  │───▶│   Backend   │ │    │
-│  │  │  :8501     │    │   :8000     │ │    │
-│  │  └─────┬──────┘    └──────┬──────┘ │    │
-│  │        │                   │         │    │
-│  └────────┼───────────────────┼────────┘    │
-│           │                   │              │
-│      Port 8501            Port 8000          │
-│           │                   │              │
-└───────────┼───────────────────┼──────────────┘
-            │                   │
-            ↓                   ↓
-        Browser             RSS Feeds
+┌──────────────────────────────────────────────────────────┐
+│              Docker Host (Your Machine)                   │
+│                                                           │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │       cybersecurity-network (Bridge)             │    │
+│  │                                                   │    │
+│  │  ┌────────────┐   ┌─────────────┐  ┌──────────┐ │    │
+│  │  │  Frontend  │──▶│   Backend   │─▶│Elasticsearch│   │
+│  │  │  :8501     │   │   :8000     │  │   :9200   │ │    │
+│  │  └──────┬─────┘   └──────┬──────┘  └─────┬────┘ │    │
+│  │         │                │                │       │    │
+│  └─────────┼────────────────┼────────────────┼──────┘    │
+│            │                │                │            │
+│       Port 8501        Port 8000        Port 9200         │
+│            │                │                │            │
+└────────────┼────────────────┼────────────────┼───────────┘
+             │                │                │
+             ↓                ↓                ↓
+         Browser          RSS Feeds       Data Storage
+                                          (10min cache)
 ```
 
 ---
