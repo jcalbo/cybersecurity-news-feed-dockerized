@@ -13,21 +13,26 @@ This is the **COMPLETE** dev02 setup that includes all features from dev01:
 ## 🏗️ **Complete Architecture**
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                    Docker Compose                    │
-│                                                       │
-│  ┌──────────────┐   ┌──────────────┐  ┌──────────┐ │
-│  │   Frontend   │──▶│   Backend    │─▶│Elasticsearch│
-│  │   Streamlit  │   │   FastAPI    │  │   8.15.2  │ │
-│  │   :8501      │   │   :8000      │  │   :9200   │ │
-│  └──────────────┘   └──────────────┘  └──────────┘ │
-│         │                   │                │       │
-│         │                   │                │       │
-└─────────┼───────────────────┼────────────────┼──────┘
-          │                   │                │
-          ↓                   ↓                ↓
-      User Browser      RSS Feed Scraper   News Storage
-                        (5 sources)        (10min cache)
+┌──────────────────────────────────────────────────────────────┐
+│                      Docker Compose                           │
+│                                                               │
+│  ┌──────────────┐   ┌──────────────┐  ┌──────────┐          │
+│  │   Frontend   │──▶│   Backend    │─▶│Elasticsearch│        │
+│  │   Streamlit  │   │   FastAPI    │  │   8.15.2  │         │
+│  │   :8501      │   │   :8000      │  │   :9200   │         │
+│  └──────────────┘   └──────────────┘  └─────┬─────┘         │
+│         │                   │                │               │
+│         │                   │                ↓               │
+│         │                   │          ┌──────────┐          │
+│         │                   │          │  Kibana  │          │
+│         │                   │          │  8.15.2  │          │
+│         │                   │          │  :5601   │          │
+│         │                   │          └──────────┘          │
+└─────────┼───────────────────┼────────────────────────────────┘
+          │                   │
+          ↓                   ↓
+      User Browser      RSS Feed Scraper
+                        (5 sources)
 ```
 
 ---
@@ -115,6 +120,7 @@ cybersecurity-news-frontend       Up        0.0.0.0:8501->8501/tcp
 - **Frontend:** http://localhost:8501
 - **Backend API:** http://localhost:8000
 - **Elasticsearch:** http://localhost:9200
+- **Kibana:** http://localhost:5601
 
 ---
 

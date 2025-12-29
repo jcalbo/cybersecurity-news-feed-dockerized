@@ -92,6 +92,10 @@ Docker Host
     │   └── Document storage & search
     │       └── 10-minute cache for news
     │
+    ├── Kibana Container (port 5601)
+    │   └── Elasticsearch monitoring & visualization
+    │       └── Query builder and dashboards
+    │
     ├── Backend Container (port 8000)
     │   └── FastAPI REST API
     │       ├── Fetches RSS feeds

@@ -28,8 +28,9 @@ That's it! Services will be available at:
 - **Frontend UI:** http://localhost:8501
 - **Backend API:** http://localhost:8000
 - **Elasticsearch:** http://localhost:9200
+- **Kibana (monitoring):** http://localhost:5601
 
-**Note:** First startup takes ~60 seconds for Elasticsearch to initialize.
+**Note:** First startup takes ~60 seconds for Elasticsearch and Kibana to initialize.
 
 ### **Option 2: Individual Containers**
 
@@ -169,10 +170,16 @@ services:
 │  │  │  :8501     │   │   :8000     │  │   :9200   │ │    │
 │  │  └──────┬─────┘   └──────┬──────┘  └─────┬────┘ │    │
 │  │         │                │                │       │    │
-│  └─────────┼────────────────┼────────────────┼──────┘    │
-│            │                │                │            │
-│       Port 8501        Port 8000        Port 9200         │
-│            │                │                │            │
+│  │         │                │                ↓       │    │
+│  │         │                │          ┌──────────┐ │    │
+│  │         │                │          │  Kibana  │ │    │
+│  │         │                │          │  :5601   │ │    │
+│  │         │                │          └──────────┘ │    │
+│  │         │                │                        │    │
+│  └─────────┼────────────────┼────────────────────────┘    │
+│            │                │                             │
+│       Port 8501        Port 8000    Ports 9200, 5601     │
+│            │                │                             │
 └────────────┼────────────────┼────────────────┼───────────┘
              │                │                │
              ↓                ↓                ↓

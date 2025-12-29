@@ -127,6 +127,7 @@ docker-compose down
 - Frontend UI: http://localhost:8501
 - Backend API: http://localhost:8000
 - Elasticsearch: http://localhost:9200
+- Kibana (monitoring): http://localhost:5601
 
 **First startup takes ~60 seconds** for Elasticsearch initialization.
 
