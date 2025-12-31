@@ -79,6 +79,27 @@ def display_connection_status(api_client):
         
         if is_healthy:
             st.success("✅ Connected to Backend API")
+            
+            # Get Elasticsearch stats
+            try:
+                stats = api_client.get_elasticsearch_stats()
+                if "error" not in stats:
+                    st.subheader("📊 Elasticsearch Stats")
+                    st.metric("Total Documents", stats.get("total_documents", 0))
+                    
+                    latest_fetch = stats.get("latest_fetch")
+                    if latest_fetch:
+                        st.text(f"Last fetch: {format_time_ago(latest_fetch)}")
+                    else:
+                        st.text("No data fetched yet")
+                    
+                    cache_fresh = stats.get("cache_is_fresh", False)
+                    if cache_fresh:
+                        st.success("✅ Cache is fresh")
+                    else:
+                        st.warning("⏳ Cache needs refresh")
+            except Exception as e:
+                st.warning(f"Could not get Elasticsearch stats")
         else:
             st.error("❌ Cannot connect to Backend API")
             st.info(f"Server URL: {API_SERVER_URL}")

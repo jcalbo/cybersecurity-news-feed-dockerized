@@ -270,3 +270,4 @@ cd frontend && uv sync
 **Your system is now working! 🎉**
 
 
+

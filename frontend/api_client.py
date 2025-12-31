@@ -90,6 +90,24 @@ class NewsAPIClient:
             return response.status_code == 200
         except:
             return False
+    
+    def get_elasticsearch_stats(self) -> Dict:
+        """Get Elasticsearch statistics.
+        
+        Returns:
+            Dict with Elasticsearch stats or error
+        """
+        try:
+            response = requests.get(
+                f"{self.base_url}/api/stats",
+                timeout=10
+            )
+            
+            response.raise_for_status()
+            return response.json()
+            
+        except requests.exceptions.RequestException as e:
+            return {"error": str(e)}
 
 
 # Singleton instance

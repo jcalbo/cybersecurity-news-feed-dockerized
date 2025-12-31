@@ -60,7 +60,7 @@ logs/
 elasticsearch-data/
 
 # Docker
-.dockerignore
+# .dockerignore  # Commented out - we want to track these files
 docker-compose.override.yml
 
 # Testing
